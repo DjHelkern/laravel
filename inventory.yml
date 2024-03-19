@@ -1,0 +1,4 @@
+[web_servers]
+# web_servers
+web_servers ansible_host=62.84.113.149
+

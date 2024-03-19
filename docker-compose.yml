@@ -1,0 +1,34 @@
+version: '2'
+
+services:
+  app:
+    image: 'bitnami/laravel:latest'
+    ports:
+      - '80:80'
+    environment:
+      - ALLOW_EMPTY_PASSWORD=yes
+    volumes:
+      - './laravel:/app'
+    depends_on:
+      - db
+    networks:
+      - laravel
+
+  db:
+    image: 'bitnami/mysql:latest'
+    environment:
+      - ALLOW_EMPTY_PASSWORD=yes
+      - MYSQL_DATABASE=laravel
+      - MYSQL_USER=laravel_user
+      - MYSQL_PASSWORD=your_password
+      - MYSQL_ROOT_PASSWORD=your_root_password
+    volumes:
+      - 'mysql_data:/bitnami/mysql/data'
+    networks:
+      - laravel
+
+networks:
+  laravel:
+
+volumes:
+  mysql_data:
